@@ -55,12 +55,21 @@ def evaluate_models(X_train, y_train,X_test, y_test, models, params):
 
 def load_object(file_path):
     try:
-        # src/utils.py → go up ONE level to project root (/app)
+        # 1. Normalize Windows backslashes → Linux slashes
+        file_path = file_path.replace("\\", "/")
+
+        # 2. Ensure relative path (remove accidental leading /)
+        file_path = file_path.lstrip("/")
+
+        # 3. Project root = one level above src/
         base_dir = os.path.abspath(
             os.path.join(os.path.dirname(__file__), "..")
         )
 
         full_path = os.path.join(base_dir, file_path)
+
+        # DEBUG (keep for now)
+        print("LOADING FROM:", full_path)
 
         with open(full_path, "rb") as file_obj:
             return dill.load(file_obj)
