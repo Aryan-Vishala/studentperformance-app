@@ -55,9 +55,11 @@ def evaluate_models(X_train, y_train,X_test, y_test, models, params):
 
 def load_object(file_path):
     try:
+        # src/utils.py → go up ONE level to project root (/app)
         base_dir = os.path.abspath(
-            os.path.join(os.path.dirname(__file__), "..", "..")
+            os.path.join(os.path.dirname(__file__), "..")
         )
+
         full_path = os.path.join(base_dir, file_path)
 
         with open(full_path, "rb") as file_obj:
